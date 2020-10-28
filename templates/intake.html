@@ -1,0 +1,66 @@
+<DOCTYPE html>
+<html>
+  <head>
+    <title>SelfCare101 - {{ title }}</title>
+    <link rel="stylesheet" href="https://unpkg.com/picnic"/>
+  </head>
+  <body>
+    <nav>
+      <a href="/survey" class="brand"><span>Please answer these Prescreening Questions:</span></a>
+    </nav>
+    <style>
+      h1 {color:purple;}
+      p {color:green;}
+      .all-browsers {background-color:rgb(131, 24, 24);}
+    </style>
+    <article class="flex two" style="padding: 3em 1em;">
+      {% block content %}
+      <div>
+        <h1>{{ title }}</h1>
+        <p>Please answer these pre-screening questions truthfully:</p>
+        <form action="/survey" method="post">
+          <label for="Over18">Are you an adult over the age of 18?</label>
+          <select name="Over18", placeholder="Please select">
+            <option value="Adult">I am an adult over the age of 18.</option>
+            <option value="Child">I am a child under the age of 18.</option>
+            <option value="Guardian">I am and adult using this app on behalf of a child.</option>
+          </select>
+          
+          <label for="CurrentlyPregnant">Are you currently pregnant?</label>
+          <select name="CurrentlyPregnant">
+            <option value="NotPregnant">I am NOT currently pregnant.</option>
+            <option value="Pregnant">I am currently pregnant.</option>
+            <option value="DrClearedPregnant">My doctor acknowledged the risks and approved my use of this app.</option>
+          </select>
+
+          <label for="DrsCare">Are you currently under a doctor's care for cancer or other illness?</label>
+          <select name="DrsCare">
+            <option value="NotUnderDr">I am NOT under a doctor's care.</option>
+            <option value="UnderDr">I am currently under a doctor's care.</option>
+            <option value="DrClearedGeneral">My doctor acknowledged the risks and approved my use of this app.</option>
+          </select>
+
+          <label for="InjuryStatus">What injuries have you had recently?</label>
+          <select name="InjuryStatus">
+            <option value="NotInjured">I have had ZERO minor or major injuries in the last 6 months.</option>
+            <option value="Major">I had a major injury less than 6 months ago or minor injury less than 1 month ago.</option>
+            <option value="AcuteCleared">I had a minor injury over a month ago.</option>
+            <option value="Chronic">I suffer from chronic pain from an injury that occured more than 6 months ago.</option>
+          </select>
+
+
+          <input type="submit" value="Submit">
+        </form>  
+      </div>
+      {% endblock %}
+    </article>
+
+
+
+
+
+
+
+  </body>
+</html>
+</DOCTYPE>

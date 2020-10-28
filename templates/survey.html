@@ -1,0 +1,150 @@
+<DOCTYPE html>
+    <html>
+      <head>
+        <title>SelfCare101 - {{ title }}</title>
+        <link rel="stylesheet" href="https://unpkg.com/picnic"/>
+      </head>
+      <body>
+        <nav>
+          <a href="/results" class="brand"><span>Health Screening:</span></a>
+        </nav>
+    
+        <article class="flex two" style="padding: 1em 1em;">
+          {% block content %}
+          <div>
+            <h1>{{ title }}</h1>
+            <p>Be honest with yourself:</p>
+            <form action="/results" method="post">
+
+              <label for="Age">What is your age (in YEARS)?</label><br>
+              <input type="number", id="Age", name="Age", value="120"><br>
+
+              <label for="Weight">How much do you weight (in POUNDS)?</label><br>
+              <input type="number", id="Weight", name="Weight", value="120"><br>
+
+              <label for="Water">On average, how much water do you drink per day (in OUNCES)?</label><br>
+              <input type="number", id="Water", name="Water", value="0"><br>
+
+              <p>On average, how much time do you spend on the following tasks PER DAY (IN MINUTES)?</p>
+              <label for="PhoneTime">LOOKING at your PHONE?</label><br>
+              <input type="number", id="PhoneTime", name="PhoneTime", value="120"><br>
+
+              <label for="CompTime">USING your COMPUTER?</label><br>
+              <input type="number", id="CompTime", name="CompTime", value="120"><br>
+
+              <label for="DriveTime">DRIVING a CAR?</label><br>
+              <input type="number", id="DriveTime", name="DriveTime", value="120"><br>
+
+              <label for="SittingTime">SITTING down?</label><br>
+              <input type="number", id="SittingTime", name="SittingTime", value="120"><br>
+
+              <label for="StandingTime">Standing STILL?</label><br>
+              <input type="number", id="StandingTime", name="StandingTime", value="120"><br>
+
+              <label for="WalkingTime">WALKING?</label><br>
+              <input type="number", id="WalkingTime", name="WalkingTime", value="0"><br>
+
+              <label for="RunningTime">RUNNING?</label><br>
+              <input type="number", id="RunningTime", name="RunningTime", value="0"><br>
+
+              <label for="BikingTime">BIKING?</label><br>
+              <input type="number", id="BikingTime", name="BikingTime", value="0"><br>
+
+              <label for="ExerciseTime">Doing any OTHER exercise?</label><br>
+              <input type="number", id="ExerciseTime", name="ExerciseTime", value="0"><br>
+
+              <label for="StretchingTime">STRETCHING or doing YOGA?</label><br>
+              <input type="number", id="StretchingTime", name="StretchingTime", value="0"><br>
+
+              <p>On average, how much time do you spend on the following tasks PER DAY (IN HOURS)?</p>
+              <label for="SleepingTime">SLEEPING?</label><br>
+              <input type="number", id="SleepingTime", name="SleepingTime", value="10"><br>
+
+              <label for="WorkingTime">AT work?</label><br>
+              <input type="number", id="WorkingTime", name="WorkingTime", value="10"><br>
+
+              <label for="Digestion">On average, how often do you experience indigestion, heart burn, or other digestive issues?</label><br>
+              <select name="Digestion", id="Digestion", placeholder="Please select">
+                <option value="SlowDigest">Too Often</option>
+                <option value="AvgDigest">Sometimes, but rarely</option>
+                <option value="GoodDigest">Never or Almost Never</option>
+              </select>
+
+              <label for="Stamina">How is your STAMINA, or overall energy level?</label><br>
+              <select name="Stamina", id="Stamina", placeholder="Please select">
+                <option value="LowStamina">I often feel tired or unmotivated.</option>
+                <option value="AvgStamina">About average.</option>
+                <option value="HighStamina">I often have too much energy.</option>
+              </select>
+
+              <label for="Mood">How are your moods?</label><br>
+              <select name="Mood", id="Mood", placeholder="Please select">
+                <option value="BadMood">My unpredictable mood interferes with my life.</option>
+                <option value="GoodMood">My mood is stable and predictable.</option>
+              </select>
+
+              <label for="Headaches">On average, how often do you experience tension headaches, nausea, or migraines?</label><br>
+              <select name="Headaches", id="Headaches", placeholder="Please select">
+                <option value="Headaches">Too Often</option>
+                <option value="SomeHeadaches">Sometimes, but rarely</option>
+                <option value="NoHeadaches">Never or Almost Never</option>
+              </select>
+
+              <label for="Fallen">Have you EVER fallen directly onto your tailbone or sitbone?</label><br>
+              <select name="Fallen", id="Fallen", placeholder="Please select">
+                <option value="ManyTailFalls">Yes, several times</option>
+                <option value="OneTailFall">Yes, once or twice</option>
+                <option value="NoTailFall">Never that I remember</option>
+              </select>
+
+              <label for="HeadTrauma">Have you EVER had an injury to your head, neck or spine?</label><br>
+              <select name="HeadTrauma", id="HeadTrauma", placeholder="Please select">
+                <option value="ManyHeadTraumas">Yes, several times</option>
+                <option value="OneHeadTrauma">Yes, once or twice</option>
+                <option value="NoHeadTrauma">Never that I remember</option>
+              </select>
+
+              <label for="PainLevel">On a scale from 0-10, how much pain are you experiencing RIGHT NOW?</label><br>
+              <input type="number", id="PainLevel", name="PainLevel", value="0"><br>
+
+              <label for="SleepPose">What is your primary SLEEPING POSITION?</label><br>
+              <select name="SleepPose", id="SleepPose", placeholder="Please select">
+                <option value="TossTurn">I toss and turn all night.</option>
+                <option value="SideSleeper">On my side</option>
+                <option value="SupineSleeper">On my back</option>
+                <option value="ProneSleeper">Face down</option>
+              </select>
+
+              <label for="DrivePose">What is your primary DRIVING POSITION?</label><br>
+              <select name="DrivePose", id="DrivePose", placeholder="Please select">
+                <option value="TenAndTwo">Hands at 10:00 and 2:00, Always</option>
+                <option value="OneHandDriver">One hand or wrist over the steering wheel</option>
+                <option value="EightAndFour">Hands at 8:00 and 4:00 when possible</option>
+                <option value="StickShift">I drive a stick shift</option>
+              </select>
+
+              <label for="WorkPose">What is your primary WORKING POSITION?</label><br>
+              <select name="WorkPose", id="WorkPose", placeholder="Please select">
+                <option value="ActivePosture">I move around a good bit and don't lift heavy items.</option>
+                <option value="HeavyLifting">I move around and lift heavy items.</option>
+                <option value="LongStander">I STAND in one place for most of my day.</option>
+                <option value="LongSitter">I SIT down for most of my day.</option>
+                <option value="LongDriver">I drive several hours per day.</option>
+                <option value="AkwardPosture">I work in akward positions that affect my body negatively.</option>
+              </select>
+
+              <input type="submit" value="Submit">
+            </form>  
+          </div>
+          {% endblock %}
+        </article>
+    
+    
+    
+    
+    
+    
+    
+      </body>
+    </html>
+    </DOCTYPE>
