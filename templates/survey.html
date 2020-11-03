@@ -5,14 +5,17 @@
         <link rel="stylesheet" href="https://unpkg.com/picnic"/>
       </head>
       <body>
-        <nav>
-          <a href="/results" class="brand"><span>Health Screening:</span></a>
-        </nav>
+        <body style="background-color:powderblue;"></body>
+        <style>
+          h1 {color:purple;}
+          p {color:green;}
+        </style>
+
     
         <article class="flex two" style="padding: 1em 1em;">
           {% block content %}
           <div>
-            <h1>{{ title }}</h1>
+            <h1>Health Screening:</h1>
             <p>Be honest with yourself:</p>
             <form action="/results" method="post">
 
