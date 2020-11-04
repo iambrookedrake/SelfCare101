@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request
 from .db_model import DB , Client
-#import selfcare
-#from selfcare import connection, cursor
 from dotenv import load_dotenv
 from os import getenv
 import copy
@@ -25,6 +23,7 @@ PainScaleLink = '<a href="https://realtalkablog.wordpress.com/2018/05/07/no-pain
 MoodCureBookLink = '<a href=https://www.juliarosscures.com/mood-cure/>this book</a>'
 YogaBookLink = '<a href=https://www.google.com/search?q=light+on+yoga+by+b.k.s.+iyengar>Yoga</a>'
 BreakLine = '------------------------------------------------------------------------------------------------------------------------------------<br/>'
+TAKLink = '<a href=https://takeaskneaded.massagetherapy.com/>Take As Kneaded, LLC</a>'
 
 # Create App
 def create_app():
@@ -32,25 +31,23 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    #app.config['FLASK_ENV'] = 'development' # Turns debug mode ON
     DB.init_app(app)  # Connect Flask app to SQLAlchemy DB
-    #with app.app_context():#to create app for DB
-        #DB.create_all()
 
     @app.route('/')
     @app.route('/intake')
     def intake():
         return render_template('intake.html', title='Intake')
 
-    @app.route('/survey', methods=['POST'])
+    @app.route('/survey', methods=['POST']) # from intake.html
     def survey():
-        #return request.form['Over18']
+        # Form-Intake Results as variables
         Over18 = request.form['Over18']
         CurrentlyPregnant = request.form['CurrentlyPregnant']
         DrsCare = request.form['DrsCare']
         InjuryStatus = request.form['InjuryStatus']
-        #FullIntake = request.form
 
+        # Analyze Inputs for as intake for survey
+        # DECLINE access to Survey if:
         if Over18=='Child':
             return 'Please ask an adult to help you use this app. :-)'
         if CurrentlyPregnant=='Pregnant':
@@ -66,18 +63,16 @@ def create_app():
 
     @app.route('/results', methods=['POST']) #from survey.html
     def results():
-
+        #Connect to database
         DB_FILEPATH = os.path.join(os.path.dirname(__file__),
                                    "selfcare.sqlite3")
-
         connection = sqlite3.connect(DB_FILEPATH)
-        print("CONNECTION:", connection)
-
+        #print("CONNECTION:", connection)
         cursor = connection.cursor()
-        print("CURSOR:", cursor)
-        print(" ")
+        #print("CURSOR:", cursor)
+        #print(" ")
 
-
+        # Form-Survey Results as variables
         Age = int(request.form['Age'])
         Weight = int(request.form['Weight'])
         Water = int(request.form['Water'])
@@ -104,17 +99,12 @@ def create_app():
         DrivePose = request.form['DrivePose']
         WorkPose = request.form['WorkPose']
 
-        #FullForm = request.form
-        #FullForm = FullForm.copy()
-        #print(FullForm)
-        #data  = json.dumps(FullForm, skipkeys=True)
-
         MSGProblem = 'Based off your answers, here are a few things that might be affecting your day:<br/>'
         MSGSolution = 'And here are some suggestions as to what you can do to improve the quality of your life:<br/>'
         
         ###########################################PROBLEM LISTINGS##################################
         
-        # Base
+        # Base Results
         VeryActive = False
         cuff = False
         CST = False
@@ -298,8 +288,6 @@ def create_app():
         else:
             MSGWorkPose = ""
 
-
-
         MSG_Problem = BreakLine + MSGProblem + BreakLine + MSGHighPain + MSGPhone + MSGComp + MSGDrive + MSGSitting + MSGStanding + MSGWalking + MSGRunning + MSGBiking + MSGSleeping + MSGWorking + MSGFallen + MSGHeadTrauma + MSGSleepPose + MSGDrivePose + MSGWorkPose
 
         #################################SOLUTIONS################################# 
@@ -390,89 +378,37 @@ def create_app():
         #return MSGWater
 
         MSG_Solution = BreakLine + MSGSolution + BreakLine + MSGtense + MSGspasm + MSGstiff + MSGCuff + MSGCST + MSGDigestion + MSGPNS + MSGStamina + MSGMood + MSGVeryActive + MSGExercise + MSGYoga + MSGWater
-        
-        
-        
-        
-        
+ 
         ##### insert form data
+        client = Client(Age=Age, Weight=Weight, Water=Water, PhoneTime=PhoneTime, CompTime=CompTime, DriveTime=DriveTime, SittingTime=SittingTime, StandingTime=StandingTime, WalkingTime=WalkingTime, RunningTime=RunningTime, BikingTime=BikingTime, ExerciseTime=ExerciseTime, StretchingTime=StretchingTime, SleepingTime=SleepingTime, WorkingTime=WorkingTime, Digestion=Digestion, Stamina=Stamina, Mood=Mood, Headaches=Headaches, Fallen=Fallen, HeadTrauma=HeadTrauma, PainLevel=PainLevel, SleepPose=SleepPose, DrivePose=DrivePose, WorkPose=WorkPose)
+        DB.session.add(client)
+        DB.session.commit()
 
-        vals = (Age, Weight, Water, PhoneTime, CompTime, DriveTime, SittingTime, StandingTime, WalkingTime, RunningTime, BikingTime, ExerciseTime, StretchingTime, SleepingTime, WorkingTime, Digestion, Stamina, Mood, Headaches, Fallen, HeadTrauma, PainLevel, SleepPose, DrivePose, WorkPose)
-        insert_client_query = f'''INSERT INTO selfcare_table
-            (Age, Weight, Water, PhoneTime, CompTime, DriveTime, SittingTime, StandingTime, WalkingTime, RunningTime, BikingTime, ExerciseTime, StretchingTime, SleepingTime, WorkingTime, Digestion, Stamina, Mood, Headaches, Fallen, HeadTrauma, PainLevel, SleepPose, DrivePose, WorkPose)
-            VALUES {vals}
-            '''
-        #print('query:: ', insert_client_query)
-        cursor.execute(insert_client_query)
-        connection.commit()
+        # vals = (Age, Weight, Water, PhoneTime, CompTime, DriveTime, SittingTime, StandingTime, WalkingTime, RunningTime, BikingTime, ExerciseTime, StretchingTime, SleepingTime, WorkingTime, Digestion, Stamina, Mood, Headaches, Fallen, HeadTrauma, PainLevel, SleepPose, DrivePose, WorkPose)
+        # insert_client_query = f'''INSERT INTO selfcare_table
+        #     (Age, Weight, Water, PhoneTime, CompTime, DriveTime, SittingTime, StandingTime, WalkingTime, RunningTime, BikingTime, ExerciseTime, StretchingTime, SleepingTime, WorkingTime, Digestion, Stamina, Mood, Headaches, Fallen, HeadTrauma, PainLevel, SleepPose, DrivePose, WorkPose)
+        #     VALUES {vals}
+        #     '''
+        # #print('query:: ', insert_client_query)
+        # cursor.execute(insert_client_query)
+        # connection.commit()'''
 
         return render_template('results.html') + MSG_Problem + MSG_Solution + BreakLine
 
-        ###selfcare.py
     
     @app.route(getenv('database_reset_key'))
     def reset():
-
+        # Connect to database
         DB_FILEPATH = os.path.join(os.path.dirname(__file__),
                                    "selfcare.sqlite3")
-
         connection = sqlite3.connect(DB_FILEPATH)
         #print("CONNECTION:", connection)
-
         cursor = connection.cursor()
         #print("CURSOR:", cursor)
         #print(" ")
 
-        ##Create SelfCare Table with SQLite ####
-        cursor.execute('''DROP TABLE IF EXISTS selfcare_table''')
-        create_selfcare_table_query = '''
-        CREATE TABLE selfcare_table (
-            id                      INTEGER PRIMARY KEY AUTOINCREMENT,
-            Age                     INTEGER  NOT NULL,
-            Weight                  INTEGER  NOT NULL,
-            Water                   INTEGER  NOT NULL,
-            PhoneTime               INTEGER  NOT NULL,
-            CompTime                INTEGER  NOT NULL,
-            DriveTime               INTEGER  NOT NULL,
-            SittingTime             INTEGER  NOT NULL,
-            StandingTime            INTEGER  NOT NULL,
-            WalkingTime             INTEGER  NOT NULL,
-            RunningTime             INTEGER  NOT NULL,
-            BikingTime              INTEGER  NOT NULL,
-            ExerciseTime            INTEGER  NOT NULL,
-            StretchingTime          INTEGER  NOT NULL,
-            SleepingTime            INTEGER  NOT NULL,
-            WorkingTime             INTEGER  NOT NULL,
-            Digestion               STRING  NOT NULL,
-            Stamina                 STRING  NOT NULL,
-            Mood                    STRING  NOT NULL,
-            Headaches               STRING  NOT NULL,
-            Fallen                  STRING  NOT NULL,
-            HeadTrauma              STRING  NOT NULL,
-            PainLevel               INTEGER  NOT NULL,
-            SleepPose               STRING  NOT NULL,
-            DrivePose               STRING  NOT NULL,
-            WorkPose                STRING  NOT NULL
-            )
-
-            '''
-        cursor.execute(create_selfcare_table_query)
-        connection.commit()
-
-
-        # Add sample data for app creation
-        sample_data = [(50, 200, 40, 60, 60, 60, 60, 60, 15, 15, 15, 15, 15, 8, 8, 'SlowDigest', 'LowStamina', 'BadMood', 'Headaches', 'ManyTailFalls', 'ManyHeadTraumas', 8, 'SideSleeper', 'StickShift', 'LongSitter')]
-
-        for sample in sample_data:
-            insert_data_query = f'''
-            INSERT INTO selfcare_table
-            (Age, Weight, Water, PhoneTime, CompTime, DriveTime, SittingTime, StandingTime, WalkingTime, RunningTime, BikingTime, ExerciseTime, StretchingTime, SleepingTime, WorkingTime, Digestion, Stamina, Mood, Headaches, Fallen, HeadTrauma, PainLevel, SleepPose, DrivePose, WorkPose)
-            VALUES {sample}
-            '''
-            # print(insert_data_query)
-            cursor.execute(insert_data_query)
-
-        connection.commit()
+        DB.drop_all()
+        DB.create_all()
         return 'Database Reset'
 
     @app.route('/database')
@@ -492,11 +428,11 @@ def create_app():
         FROM selfcare_table
         """
         allresults = cursor.execute(allresults_query).fetchall()
-        print("All Results: ", allresults)
+        #print("All Results: ", allresults)
 
 
         last = allresults[-1]
-        print("Last Results: ", last) # PYTHON prints last line only
+        #print("Last Results: ", last) # PYTHON prints last line only
 
         # Average Age
         avgage_query = """
@@ -517,13 +453,6 @@ def create_app():
         
         print("clients: ", clients)
         return clients
-        
-        # database = tuple(allresults)
-        # print("Database: ", database)
-        # #return message
-        # #return allresults
-        # return database      
-
 
     @app.route('/TriggerPointTherapy')
     def triggerpointtherapy():

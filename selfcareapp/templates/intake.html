@@ -1,6 +1,10 @@
 <DOCTYPE html>
 <html>
   <head>
+    <style>
+      h2 {color:orangered;}
+    </style>
+    <p><b>Brooke Drake, LMT is the owner of <a href="https://takeaskneaded.massagetherapy.com/">Take As Kneaded, LLC</a><br/> and a current Data Science student. This app merges those paths.<br/><br/>Ask your healthcare provider if this app is right for you!</b></p>
     <title>SelfCare101 - {{ title }}</title>
     <link rel="stylesheet" href="https://unpkg.com/picnic"/>
   </head>
@@ -14,7 +18,7 @@
       {% block content %}
       <div>
         <h1>{{ title }}</h1>
-        <p>Please answer these pre-screening questions truthfully:</p>
+        <p><b>Please answer these pre-screening questions truthfully:</b></p>
         <form action="/survey" method="post">
           <label for="Over18">Are you an adult over the age of 18?</label>
           <select name="Over18", placeholder="Please select">
