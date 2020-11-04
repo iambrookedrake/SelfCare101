@@ -425,7 +425,7 @@ def create_app():
         # Print dataframe
         allresults_query = """
         SELECT *
-        FROM selfcare_table
+        FROM Client
         """
         allresults = cursor.execute(allresults_query).fetchall()
         #print("All Results: ", allresults)
@@ -437,7 +437,7 @@ def create_app():
         # Average Age
         avgage_query = """
         SELECT AVG(Age)
-        FROM selfcare_table
+        FROM Client
         """
         avgage = cursor.execute(avgage_query).fetchall()
         avgage = round(avgage[0][0])
