@@ -40,6 +40,7 @@ class Client(DB.Model):
 
 
 # To create the database:
+# python
 # from SelfCare101.db_model import DB, Client
 # DB.create_all()
 # to reset

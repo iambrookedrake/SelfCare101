@@ -29,7 +29,7 @@ BreakLine = '-------------------------------------------------------------------
 def create_app():
     '''Create and configure an instance of our Flask application'''
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URL') #'sqlite:///C:\\Users\\iambr\\Desktop\\Massage\\selfcare101\\selfcare.sqlite3'  # for absolute path
+    app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['FLASK_ENV'] = 'development' # Turns debug mode ON
     DB.init_app(app)  # Connect Flask app to SQLAlchemy DB
