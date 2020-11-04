@@ -1,1 +1,1 @@
-web: gunicorn care:APP -t 120
+web: gunicorn selfcare101:APP -t 120
