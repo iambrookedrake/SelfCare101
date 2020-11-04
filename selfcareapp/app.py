@@ -144,7 +144,7 @@ def create_app():
         if CompTime>=120:
             tense = True
             spasm = True
-            cuuf = True
+            cuff = True
             MSGComp = f"Computer work, or any work with our hands can cause spasms in the rotator cuff.<br/><br/>"
         else:
             MSGComp = ""
@@ -388,7 +388,7 @@ def create_app():
             MSGWater = f'Try to drink at least {suggWater} ounces, which is just {suggWaterGlass} "12-ounce glasses" of water every day.<br/><br/>'
         #return MSGWater
 
-        MSG_Solution = BreakLine + MSGSolution + BreakLine + MSGtense + MSGspasm + MSGstiff + MSGCuff + MSGCST + MSGDigestion + MSGStamina + MSGMood + MSGVeryActive + MSGExercise + MSGYoga + MSGWater
+        MSG_Solution = BreakLine + MSGSolution + BreakLine + MSGtense + MSGspasm + MSGstiff + MSGCuff + MSGCST + MSGDigestion + MSGPNS + MSGStamina + MSGMood + MSGVeryActive + MSGExercise + MSGYoga + MSGWater
         
         
         
@@ -506,8 +506,8 @@ def create_app():
         avgage = round(avgage[0][0])
         print("Average Age : ", avgage) #PYTHON prints
 
-        message = f'Average age of users is {avgage}<br/><br/>'
-        headers = 'Age, Weight, Water, PhoneTime, CompTime, DriveTime, SittingTime, StandingTime, WalkingTime, RunningTime, BikingTime, ExerciseTime, StretchingTime, SleepingTime, WorkingTime, Digestion, Stamina, Mood, Headaches, Fallen, HeadTrauma, PainLevel, SleepPose, DrivePose, WorkPose'
+        # message = f'Average age of users is {avgage}<br/><br/>'
+        # headers = 'Age, Weight, Water, PhoneTime, CompTime, DriveTime, SittingTime, StandingTime, WalkingTime, RunningTime, BikingTime, ExerciseTime, StretchingTime, SleepingTime, WorkingTime, Digestion, Stamina, Mood, Headaches, Fallen, HeadTrauma, PainLevel, SleepPose, DrivePose, WorkPose'
         
         # for c in allresults:
         #     clients = dict(headers,c)
