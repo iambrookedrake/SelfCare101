@@ -1,4 +1,4 @@
-"""Entry point for TwitOff aka GuessWho Flask Application."""
-from .app import create_app
+"""Entry point for TwitOff aka SelfCare101 Flask Application."""
+from selfcareapp.app import create_app
 
 APP = create_app()

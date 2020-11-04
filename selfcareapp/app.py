@@ -31,7 +31,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['FLASK_ENV'] = 'development' # Turns debug mode ON
+    #app.config['FLASK_ENV'] = 'development' # Turns debug mode ON
     DB.init_app(app)  # Connect Flask app to SQLAlchemy DB
     #with app.app_context():#to create app for DB
         #DB.create_all()
