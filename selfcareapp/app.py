@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from db_model import DB , Client
+from .db_model import DB , Client
 #import selfcare
 #from selfcare import connection, cursor
 from dotenv import load_dotenv
