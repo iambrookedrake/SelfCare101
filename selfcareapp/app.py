@@ -326,7 +326,7 @@ def create_app():
         # Rotator Cuff Issues?
         RotatorCuffLink = '<a href=https://www.yorkvillesportsmed.com/blog/top-rotator-cuff-exercises-for-stretches-strengthening>rotator cuff</a>'
         if cuff==True:
-            MSGCuff = f"{RotatorCuffLink} issues are unique because soft tissue damage won't always appear in medical testing. If your range of motion is affected consult your healthcare provider to ensure there is no acute injury.<br/><br/>Otherwise, even extreme pain often turns out to be linked to a {TPTLink} that is difficult to access."
+            MSGCuff = f"{RotatorCuffLink} issues are unique because soft tissue damage won't always appear in medical testing. If your range of motion is affected consult your healthcare provider to ensure there is no acute injury.<br/>Otherwise, even extreme pain often turns out to be linked to a {TPTLink} that is difficult to access.<br/><br/>"
         else:
             MSGCuff = ""
 
