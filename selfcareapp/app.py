@@ -25,6 +25,7 @@ PainScaleLink = '<a href="https://realtalkablog.wordpress.com/2018/05/07/no-pain
 MoodCureBookLink = '<a href=https://www.juliarosscures.com/mood-cure/>this book</a>'
 YogaBookLink = '<a href=https://www.google.com/search?q=light+on+yoga+by+b.k.s.+iyengar>Yoga</a>'
 BreakLine = '------------------------------------------------------------------------------------------------------------------------------------<br/>'
+
 # Create App
 def create_app():
     '''Create and configure an instance of our Flask application'''

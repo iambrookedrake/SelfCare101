@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 #import selfcare
 #from selfcare import connection, cursor
-from .app import create_app
+#from .app import create_app
 
 
 DB = SQLAlchemy()
