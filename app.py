@@ -9,18 +9,9 @@ import json
 import os
 import sqlite3
 import pandas as pd
-import tkinter
-from tkinter import Tk
+
 
 load_dotenv()
-#####Basic Color Scheme
-#gui = Tk(className='Python Examples - Window Color')
-# set window size
-#gui.geometry("400x200")
-#set window color
-#gui['bg']='lightblue'
-#gui.mainloop()
-
 
 # Internal Links
 CSTLink = '<a href="https://my.clevelandclinic.org/health/treatments/17677-craniosacral-therapy#:~:text=Craniosacral%20therapy%20(CST)%20is%20a,and%20boosting%20health%20and%20immunity.">CranioSacral Therapy</a>'#'<a href="/CranioSacralTherapy">CranioSacral Therapy</a>'
@@ -38,7 +29,7 @@ BreakLine = '-------------------------------------------------------------------
 def create_app():
     '''Create and configure an instance of our Flask application'''
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\iambr\\Desktop\\Massage\\selfcare101\\selfcare.sqlite3'  # for absolute path
+    app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URL') #'sqlite:///C:\\Users\\iambr\\Desktop\\Massage\\selfcare101\\selfcare.sqlite3'  # for absolute path
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['FLASK_ENV'] = 'development' # Turns debug mode ON
     DB.init_app(app)  # Connect Flask app to SQLAlchemy DB
